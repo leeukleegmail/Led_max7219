@@ -1,17 +1,32 @@
-from time import sleep
+from machine import RTC
 
-from display import light_pixel
+from patterns import windmill, night_rider, r_l_fill, l_r_fill, chase_edge, spiral, r_l_sweep, l_r_sweep, t_b_fill, \
+    b_t_fill
 
-sleep_time = 0.25
+rtc = RTC()
+rtc.datetime((2017, 8, 23, 1, 12, 48, 0, 0))  # set a specific date and time
+datetime = rtc.datetime()[-1]  # get date and time
 
 while True:
-    x = 0
-    while x < 8:
-        light_pixel(x)
-        x += 1
-        sleep(sleep_time)
-    x -= 1
-    while x > 1:
-        x -= 1
-        light_pixel(x)
-        sleep(sleep_time)
+    datetime = rtc.datetime()[-1]
+    sequence = str(datetime)[-1]
+    if sequence == "0":
+        windmill(0.1)
+    if sequence == "1":
+        night_rider(0.05)
+    if sequence == "2":
+        spiral(0)
+    if sequence == "3":
+        chase_edge(0.05)
+    if sequence == "4":
+        l_r_fill(0.1)
+    if sequence == "5":
+        r_l_fill(0.1)
+    if sequence == "6":
+        l_r_sweep(0.1)
+    if sequence == "7":
+        r_l_sweep(0.1)
+    if sequence == "8":
+        t_b_fill(0.1)
+    if sequence == "9":
+        b_t_fill(0.1)
