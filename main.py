@@ -6,7 +6,7 @@ rtc = RTC()
 rtc.datetime((2017, 8, 23, 1, 12, 48, 0, 0))  # set a specific date and time
 
 
-def run_pattern(pattern):
+def run_led_pattern(pattern):
     if pattern == "0":
         patterns.windmill(0.1)
     if pattern == "1":
@@ -35,4 +35,4 @@ def randomish_number():
 
 
 while True:
-    run_pattern(randomish_number())
+    run_led_pattern(randomish_number())
